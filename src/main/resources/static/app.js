@@ -212,6 +212,7 @@ function init() {
     sessionStorage.setItem('token', session.token);
     sessionStorage.setItem('email', session.email);
     event.target.reset();
+    setAuthMode(false); // The next time this form appears, it should be for logging in.
     render();
   }));
   $('auth-toggle').addEventListener('click', () => setAuthMode(!registering));
