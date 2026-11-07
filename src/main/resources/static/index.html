@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Job Application Tracker</h1>
+    <div id="session" hidden>
+      <span id="current-email"></span>
+      <button id="logout" class="link">Log out</button>
+    </div>
+  </header>
+
+  <p id="error" class="error" role="alert" hidden></p>
+
+  <main>
+    <section id="auth" class="card narrow" hidden>
+      <h2 id="auth-title">Log in</h2>
+      <form id="auth-form">
+        <label>Email <input name="email" type="email" required autocomplete="username"></label>
+        <label>Password <input name="password" type="password" required minlength="8" autocomplete="current-password"></label>
+        <button type="submit" id="auth-submit">Log in</button>
+      </form>
+      <button id="auth-toggle" class="link">Need an account? Register</button>
+    </section>
+
+    <section id="board" hidden>
+      <div class="toolbar">
+        <label>Status
+          <select id="status-filter"><option value="">All</option></select>
+        </label>
+        <button id="new-application">Add application</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Company</th><th>Role</th><th>Status</th><th>Applied</th><th>Location</th></tr></thead>
+          <tbody id="applications"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="muted" hidden>Nothing here yet. Add your first application.</p>
+    </section>
+
+    <section id="detail" class="card" hidden>
+      <h2 id="detail-title">New application</h2>
+      <form id="application-form" class="grid">
+        <label>Company <input name="company" required maxlength="200"></label>
+        <label>Role <input name="role" required maxlength="200"></label>
+        <label>Link <input name="url" type="url" maxlength="2048" placeholder="https://"></label>
+        <label>Location <input name="location" maxlength="200"></label>
+        <label>Status <select name="status"></select></label>
+        <label>Applied on <input name="appliedOn" type="date"></label>
+        <label class="wide">Notes <textarea name="notes" rows="3" maxlength="5000"></textarea></label>
+        <div class="wide actions">
+          <button type="submit">Save</button>
+          <button type="button" id="close-detail" class="secondary">Close</button>
+          <a id="job-link" target="_blank" rel="noopener noreferrer" hidden>Open job posting</a>
+          <button type="button" id="delete-application" class="danger" hidden>Delete</button>
+        </div>
+      </form>
+
+      <div id="children" hidden>
+        <h3>Interview stages</h3>
+        <ul id="interviews" class="items"></ul>
+        <form id="interview-form" class="inline">
+          <select name="stage" aria-label="Stage" required></select>
+          <input name="scheduledAt" type="datetime-local" aria-label="Date and time">
+          <input name="notes" placeholder="Notes" aria-label="Notes" maxlength="2000">
+          <button type="submit">Add stage</button>
+        </form>
+
+        <h3>Reminders</h3>
+        <ul id="reminders" class="items"></ul>
+        <form id="reminder-form" class="inline">
+          <input name="remindAt" type="datetime-local" aria-label="Remind me at" required>
+          <input name="message" placeholder="What should I remind you about?" aria-label="Message" required maxlength="500">
+          <button type="submit">Add reminder</button>
+        </form>
+
+        <h3>History</h3>
+        <ul id="history" class="items muted"></ul>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Local development only: a file-based H2 database and a throwaway signing key.
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/jobtracker;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password: ""
+
+app:
+  jwt-secret: dev-only-secret-never-use-in-production-0123456789
